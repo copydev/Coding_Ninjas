@@ -79,6 +79,41 @@ public class BinaryTreeUse {
 		return root;
 	}
 	
+	public static void printLevelWise(BinaryTreeNode<Integer> root){
+		if(root==null){
+			return;
+		}
+		QueueUsingLL<BinaryTreeNode<Integer>> pendingNodes = new QueueUsingLL<>();
+		pendingNodes.enqueue(root);
+		while(!pendingNodes.isEmpty()){
+			String s = new String();
+			BinaryTreeNode<Integer> front = null;
+			try {
+				front = pendingNodes.dequeue();
+			} catch (QueueEmptyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			s= front.data +":";
+			if(front.left!=null){
+				s+="L:"+front.left.data+",";
+				pendingNodes.enqueue(front.left);
+			}
+			else{
+	              s+="L:-1,";
+	            }
+			if(front.right!=null){
+				s+="R:"+front.right.data;
+				pendingNodes.enqueue(front.right);
+			}
+			else{
+	            s+="R:-1";
+	          }
+			System.out.println(s);
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		BinaryTreeNode<Integer> root = takeInputLevelWise();
