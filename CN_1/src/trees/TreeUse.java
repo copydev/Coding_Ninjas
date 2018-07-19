@@ -14,6 +14,13 @@ public class TreeUse {
 		// TreeNode<Integer> root = takeInput(s);
 		TreeNode<Integer> root = takeInputLevelWise();
 
+		
+		try {
+			replaceWithDepthValue(root);
+		} catch (QueueEmptyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		printLevelWise(root);
 
 	}
@@ -114,6 +121,32 @@ public class TreeUse {
 
 		}
 
+	}
+	
+	public static void replaceWithDepthValue(TreeNode<Integer> root) throws QueueEmptyException{
+
+		// Write your code here
+      int k = 0;
+      QueueUsingLL<TreeNode<Integer>> queue = new QueueUsingLL<>();
+      queue.enqueue(root);
+      TreeNode<Integer> brk = new TreeNode<>(Integer.MIN_VALUE);
+      queue.enqueue(brk);
+      while(queue.size()!=1){
+        
+        TreeNode<Integer> curr = queue.dequeue();
+        if(curr==brk){
+          
+         // queue.dequeue();
+          queue.enqueue(brk);
+          k++;
+          continue;
+        }
+        curr.data=k;
+        for(int i =0;i<curr.children.size();i++){
+          queue.enqueue(curr.children.get(i));
+        }
+      }
+		
 	}
 	
 	public static int numNodes(TreeNode<Integer> root){
