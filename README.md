@@ -1,2 +1,2 @@
-# Rep2-discovering-new-stuff
+# CodingNinjas
 This is all the codingNinjas stuff they taught.
